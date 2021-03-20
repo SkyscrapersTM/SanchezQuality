@@ -1,0 +1,27 @@
+.barra{
+    height: 64.80px;
+}
+
+.navbar{
+    height: 100%;
+}
+
+.bg-gray{
+    background-color: #343a40;
+}
+
+.btn-search {
+    right: 5px;
+}
+
+.bg-primary {
+    background-color: #ffffff !important;
+} 
+
+.border-bottom{
+    border-bottom: 1px solid #ccc;
+}
+
+.avatar{
+    max-width: 35px;
+}

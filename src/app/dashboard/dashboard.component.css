@@ -1,0 +1,40 @@
+:root {
+    --primary: #f8f9fa;
+    --dark: #000 ;
+    --light: #ffffff;
+    --grey: #efefef;
+}
+
+.bg-primary {
+    background-color: #f8f9fa !important;
+}
+
+.border-right{
+    border-right: 1px solid #ccc;
+}
+
+.border-buttom{
+    border-bottom: 1px solid #ccc;
+}
+
+#sidebar-container{
+    min-height: 100vh;
+}
+
+#sidebar-container .logo {
+    padding: .875rem 1.25rem;
+}
+
+#sidebar-container .menu {
+    width: 18rem;
+}
+
+#sidebar-container .menu a{
+    text-decoration: none;
+    color: #343a40;
+}
+
+#sidebar-container .menu a:hover{
+    color: #000;
+}
+
