@@ -1,52 +1,121 @@
 <div class="d-flex">
-    <app-dashboard></app-dashboard>
-    <div class="w-100">
-        <app-navbar></app-navbar>
-        <div id="content">
-            <section class="mb-3">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-9">
-                            <h1 class="fw-bold">Mantemiento de Productos</h1>
-                            <p class="lead text-muted">Registra, actualiza o elimina el producto.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section>
-                <div class="container">
-                    <table class="table table-striped table-hover">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                </div>
-            </section>
+  <app-dashboard></app-dashboard>
+  <div class="w-100">
+    <app-navbar></app-navbar>
+    <div id="content">
+      <section class="mb-3">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-9">
+              <h1 class="fw-bold">Mantemiento de Productos</h1>
+              <p class="lead text-muted">Registra, actualiza o elimina el producto.</p>
+            </div>
+          </div>
         </div>
+      </section>
+      <section>
+        <div class="container">
+          <form>
+            <div class="row mb-2">
+              <div class="col-3">
+                <div class="form-group">
+                  <label for="marcaElegida"><b>Marca:</b></label>
+                  <select class="form-select" name="marcaElegida" id="marcaElegida" [(ngModel)]="marcaElegida"
+                    (change)="onChangeMarca()">
+                    <option [ngValue]="null" selected>Elige una marca</option>
+                    <option [ngValue]="marca" *ngFor="let marca of marcas">{{marca.nombre}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="descripcion"><b>Descripción:</b></label>
+                  <div class="input-group">
+                    <button class="btn btn-outline-danger" (click)="clearDescripcion()"
+                      [disabled]="!busquedaDTO.descripcion">Vaciar</button>
+                    <input class="form-control" type="text" name="descripcion" id="descripcion"
+                      [(ngModel)]="busquedaDTO.descripcion" placeholder="Ingrese una descripción">
+                    <button class="btn btn-outline-success" (click)="listaProductos()">Filtrar</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3 offset-2">
+                <label for="reset"><b>Restablecer:</b></label>
+                <button class="btn btn-outline-danger form-control" (click)="clear()">Borrar Filtros</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3">
+                <label for="cantidadDesde">Stock Desde:</label>
+                <div class="input-group">
+                  <button class="btn btn-outline-danger" (click)="clearStockDesde()"
+                    [disabled]="!busquedaDTO.cantidadDesde">Vaciar</button>
+                  <input type="number" class="form-control" name="cantidadDesde" id="cantidadDesde"
+                    [(ngModel)]="busquedaDTO.cantidadDesde">
+                  <button class="btn btn-outline-success" (click)="listaProductos()">Filtrar</button>
+                </div>
+              </div>
+              <div class="col-3">
+                <label for="cantidadHasta">Stock Hasta:</label>
+                <div class="input-group">
+                  <button class="btn btn-outline-danger" (click)="clearStockHasta()"
+                    [disabled]="!busquedaDTO.cantidadHasta">Vaciar</button>
+                  <input type="number" class="form-control" name="cantidadHasta" id="cantidadHasta"
+                    [(ngModel)]="busquedaDTO.cantidadHasta">
+                  <button class="btn btn-outline-success" (click)="listaProductos()">Filtrar</button>
+                </div>
+              </div>
+              <div class="col-3">
+                <label for="precioDesde">Precio Desde:</label>
+                <div class="input-group">
+                  <button class="btn btn-outline-danger" (click)="clearPrecioDesde()"
+                    [disabled]="!busquedaDTO.precioDesde">Vaciar</button>
+                  <input type="number" class="form-control" name="precioDesde" id="precioDesde"
+                    [(ngModel)]="busquedaDTO.precioDesde">
+                  <button class="btn btn-outline-success" (click)="listaProductos()">Filtrar</button>
+                </div>
+              </div>
+              <div class="col-3">
+                <label for="precioHasta">Precio Hasta:</label>
+                <div class="input-group">
+                  <button class="btn btn-outline-danger" (click)="clearPrecioHasta()"
+                    [disabled]="!busquedaDTO.precioHasta">Vaciar</button>
+                  <input type="number" class="form-control" name="precioHasta" id="precioHasta"
+                    [(ngModel)]="busquedaDTO.precioHasta">
+                  <button class="btn btn-outline-success" (click)="listaProductos()">Filtrar</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="container">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Marca</th>
+                <th scope="col">Descripción</th>
+                <th class="text-center" scope="col">Stock</th>
+                <th scope="col">Precio</th>
+                <th class="text-center" scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let producto of productos">
+                <td class="pt-3">{{producto.marca.nombre}}</td>
+                <td class="pt-3">{{producto.descripcion}}</td>
+                <td class="text-center pt-3">{{producto.cantidad}}</td>
+                <td class="pt-3">S/{{producto.precio}}</td>
+                <td class="text-center">
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-outline-primary">Editar</button>
+                    <button type="button" class="btn btn-outline-danger">Eliminar</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
     </div>
+  </div>
 </div>
-
