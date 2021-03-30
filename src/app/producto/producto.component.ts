@@ -21,9 +21,16 @@ export class ProductoComponent implements OnInit {
     cantidadDesde: null,
     cantidadHasta: null,
     precioDesde: null,
-    precioHasta: null
+    precioHasta: null,
+    page: 0,
+    size: 10,
+    order: 'descripcion',
+    asc: true
   };
-
+  isFirst: boolean = false;
+  isLast: boolean = false;
+  totalPages: Array<number>;
+  
   ngOnInit(): void {
     this.listaMarcas();
     this.listaProductos();
@@ -43,7 +50,12 @@ export class ProductoComponent implements OnInit {
   listaProductos(): void {
     this.productoService.productos(this.busquedaDTO).subscribe(
       data => {
-        this.productos = data;
+        this.productos = data['content'];
+        this.isFirst = data['first'];
+        this.isLast = data['last'];
+        this.totalPages = new Array(data['totalPages']);
+        console.log(this.totalPages);
+
       },
       err => {
         console.log(err);
@@ -91,6 +103,30 @@ export class ProductoComponent implements OnInit {
     this.busquedaDTO.cantidadHasta = null,
     this.busquedaDTO.precioDesde = null,
     this.busquedaDTO.precioHasta = null
+    this.listaProductos();
+  }
+
+  sort(): void {
+    this.busquedaDTO.asc = !this.busquedaDTO.asc;
+    this.listaProductos();
+  }
+
+  rewind(): void {
+    if (!this.isFirst) {
+      this.busquedaDTO.page--;
+      this.listaProductos();
+    }
+  }
+
+  forward(): void {
+    if (!this.isLast){
+      this.busquedaDTO.page++;
+      this.listaProductos();
+    }
+  }
+
+  setPage(page: number): void {
+    this.busquedaDTO.page = page;
     this.listaProductos();
   }
 }

@@ -3,7 +3,7 @@
   <div class="w-100">
     <app-navbar></app-navbar>
     <div id="content">
-      <section class="mb-3">
+      <section class="mb-1">
         <div class="container">
           <div class="row">
             <div class="col-lg-9">
@@ -96,7 +96,7 @@
                 <th scope="col">Descripción</th>
                 <th class="text-center" scope="col">Stock</th>
                 <th scope="col">Precio</th>
-                <th class="text-center" scope="col">Acciones</th>
+                <th class="text-center" scope="col">Acciones <i class="bi bi-chevron-expand" (click)="sort()"></i></th>
               </tr>
             </thead>
             <tbody>
@@ -114,6 +114,23 @@
               </tr>
             </tbody>
           </table>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item pointer" (click)="rewind()">
+                    <div class="page-link">
+                        <span aria-hidden="true">&laquo;</span>
+                    </div>
+                </li>
+                <li class="page-item pointer" *ngFor="let p of totalPages; index as i">
+                    <a class="page-link" [ngClass]="{'bg-primary text-white' : i === page }" (click)="setPage(i)">{{ i+1 }}</a>
+                </li>
+                <li class="page-item" (click)="forward()">
+                    <div class="page-link pointer">
+                        <span aria-hidden="true">&raquo;</span>
+                    </div>
+                </li>
+            </ul>
+        </nav>
         </div>
       </section>
     </div>

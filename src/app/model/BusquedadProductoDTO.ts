@@ -5,4 +5,8 @@ export interface BusquedadProductoDTO {
     cantidadHasta: number,
     precioDesde: number,
     precioHasta: number
+    page: number,
+    size: number,
+    order: String,
+    asc: boolean
 }
