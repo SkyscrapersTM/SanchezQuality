@@ -11,18 +11,31 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 
+import { ProductoDetalleComponent } from './producto/producto-detalle/producto-detalle.component';
+import { ProductoNuevoComponent } from './producto/producto-nuevo/producto-nuevo.component';
+import { ProductoEditarComponent } from './producto/producto-editar/producto-editar.component';
+
+//External
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     ProductoComponent,
-    NavbarComponent
+    NavbarComponent,
+    ProductoDetalleComponent,
+    ProductoNuevoComponent,
+    ProductoEditarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

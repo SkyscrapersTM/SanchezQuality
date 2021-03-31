@@ -39,9 +39,13 @@
                   </div>
                 </div>
               </div>
-              <div class="col-3 offset-2">
+              <div class="col-2">
                 <label for="reset"><b>Restablecer:</b></label>
                 <button class="btn btn-outline-danger form-control" (click)="clear()">Borrar Filtros</button>
+              </div>
+              <div class="col-3">
+                <label for="">Producto:</label>
+                <a class="btn btn-outline-success form-control" routerLink="/producto/nuevo">Agregar</a>
               </div>
             </div>
             <div class="row">
@@ -107,8 +111,9 @@
                 <td class="pt-3">S/{{producto.precio}}</td>
                 <td class="text-center">
                   <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-outline-primary">Editar</button>
-                    <button type="button" class="btn btn-outline-danger">Eliminar</button>
+                    <button type="button" class="btn btn-outline-primary" routerLink="/producto/editar/{{producto.id}}">Editar</button>
+                    <button type="button" class="btn btn-outline-danger" (click)="borrar(producto.id)">Eliminar</button>
+                    <button type="button" class="btn btn-outline-primary"  routerLink="/producto/detail/{{producto.id}}">Detalle</button>
                   </div>
                 </td>
               </tr>

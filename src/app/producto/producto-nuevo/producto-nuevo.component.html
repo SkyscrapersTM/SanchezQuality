@@ -1,0 +1,65 @@
+<div class="d-flex">
+    <app-dashboard></app-dashboard>
+    <div class="w-100">
+        <app-navbar></app-navbar>
+        <div id="content">
+            <section class="mb-1">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-4 mb-3">
+                            <h1 class="fw-bold text-center">Agregar Producto</h1>
+                            <hr>
+                        </div>
+                        <div class="col-12"></div>
+                        <div class="col-8">
+                            <form class="row shadow p-3" (ngSubmit)="onCreate()" novalidate #f="ngForm">
+                                <div class="col-1">
+                                    <label for="marca" class="col-form-label">Marca:</label>
+                                </div>
+                                <div class="col-4">
+                                    <select class="form-select" name="marca" id="marca" [(ngModel)]="marca">
+                                        <option [ngValue]="null" selected>Elige una marca</option>
+                                        <option [ngValue]="m" *ngFor="let m of marcas">{{m.nombre}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <label for="descripcion" class="col-form-label">Descripción:</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" class="form-control" id="descripcion" name="descripcion"
+                                        [(ngModel)]="descripcion" required>
+                                </div>
+                                <p></p>
+                                <div class="col-1">
+                                    <label for="cantidad" class="col-form-label">Stock:</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="number" class="form-control" id="cantidad" name="cantidad"
+                                        [(ngModel)]="cantidad" required>
+                                </div>
+                                <div class="col-1">
+                                    <label for="precio" class="col-form-label">Precio</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="number" class="form-control" id="precio" name="precio"
+                                        [(ngModel)]="precio" required>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row justify-content-between mt-3">
+                                        <div class="col-4">
+                                            <input class="btn btn-outline-warning form-control" (click)="volver()" type="text" value="Regresar">
+                                        </div>
+                                        <div class="col-4">
+                                            <button class="btn btn-outline-success form-control"
+                                                [disabled]="!f.valid">Registrar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

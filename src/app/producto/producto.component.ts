@@ -1,5 +1,6 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { BusquedadProductoDTO } from '../model/BusquedadProductoDTO';
 import { ProductoService } from './producto.service';
 
@@ -10,7 +11,10 @@ import { ProductoService } from './producto.service';
 })
 export class ProductoComponent implements OnInit {
 
-  constructor(private productoService: ProductoService) { }
+  constructor(
+    private productoService: ProductoService,
+    private toastr: ToastrService
+  ) { }
 
   marcas: any[] = [];
   productos: any[] = [];
@@ -30,7 +34,7 @@ export class ProductoComponent implements OnInit {
   isFirst: boolean = false;
   isLast: boolean = false;
   totalPages: Array<number>;
-  
+
   ngOnInit(): void {
     this.listaMarcas();
     this.listaProductos();
@@ -54,8 +58,6 @@ export class ProductoComponent implements OnInit {
         this.isFirst = data['first'];
         this.isLast = data['last'];
         this.totalPages = new Array(data['totalPages']);
-        console.log(this.totalPages);
-
       },
       err => {
         console.log(err);
@@ -89,7 +91,7 @@ export class ProductoComponent implements OnInit {
     this.busquedaDTO.precioDesde = null;
     this.listaProductos();
   }
-  
+
   clearPrecioHasta(): void {
     this.busquedaDTO.precioHasta = null;
     this.listaProductos();
@@ -99,10 +101,10 @@ export class ProductoComponent implements OnInit {
     this.marcaElegida = null;
     this.busquedaDTO.marca = '';
     this.busquedaDTO.descripcion = '',
-    this.busquedaDTO.cantidadDesde = null,
-    this.busquedaDTO.cantidadHasta = null,
-    this.busquedaDTO.precioDesde = null,
-    this.busquedaDTO.precioHasta = null
+      this.busquedaDTO.cantidadDesde = null,
+      this.busquedaDTO.cantidadHasta = null,
+      this.busquedaDTO.precioDesde = null,
+      this.busquedaDTO.precioHasta = null
     this.listaProductos();
   }
 
@@ -119,7 +121,7 @@ export class ProductoComponent implements OnInit {
   }
 
   forward(): void {
-    if (!this.isLast){
+    if (!this.isLast) {
       this.busquedaDTO.page++;
       this.listaProductos();
     }
@@ -129,4 +131,27 @@ export class ProductoComponent implements OnInit {
     this.busquedaDTO.page = page;
     this.listaProductos();
   }
+
+  borrar(id: number) {
+    let elimina: boolean;
+    elimina = confirm("¿Está seguro que desea eliminar?")
+    if (elimina == true) {
+      this.productoService.delete(id).subscribe(
+        data => {
+          this.toastr.success('Producto Eliminado!', 'OK', {
+            timeOut: 3000,
+            positionClass: 'toast-top-full-width'
+          });
+          this.listaProductos();
+        },
+        err => {
+          this.toastr.error(err.error.mensaje, 'Fail', {
+            timeOut: 3000,
+            positionClass: 'toast-top-full-width'
+          });
+        }
+      );
+    }
+  }
+
 }
