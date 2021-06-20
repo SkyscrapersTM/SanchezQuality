@@ -16,6 +16,10 @@ const routes: Routes = [
   { path: 'producto/detail/:id', component: ProductoDetalleComponent },
   { path: 'producto/nuevo', component: ProductoNuevoComponent },
   { path: 'producto/editar/:id', component: ProductoEditarComponent },
+  { path: 'proveedor', component: ProveedorComponent },
+  { path: 'proveedor/detail/:id', component: ProveedorDetalleComponent },
+  { path: 'proveedor/nuevo', component: ProveedorNuevoComponent },
+  { path: 'proveedor/editar/:id', component: ProveedorEditarComponent },
   { path: '**', redirectTo: 'producto', pathMatch: 'full' }
 
   //...
