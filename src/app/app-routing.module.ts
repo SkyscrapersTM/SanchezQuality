@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router'; // CLI imports router
+import { LoginComponent } from './auth/login.component';
+import { RegistroComponent } from './auth/registro.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductoDetalleComponent } from './producto/producto-detalle/producto-detalle.component';
 import { ProductoEditarComponent } from './producto/producto-editar/producto-editar.component';
@@ -8,6 +10,8 @@ import { ProductoComponent } from './producto/producto.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'registro', component: RegistroComponent },
   { path: 'producto', component: ProductoComponent },
   { path: 'producto/detail/:id', component: ProductoDetalleComponent },
   { path: 'producto/nuevo', component: ProductoNuevoComponent },

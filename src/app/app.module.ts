@@ -18,11 +18,18 @@ import { ProductoEditarComponent } from './producto/producto-editar/producto-edi
 //External
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
+
+
+import { LoginComponent } from './auth/login.component';
+import { RegistroComponent } from './auth/registro.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
+    LoginComponent,
+    RegistroComponent,
     ProductoComponent,
     NavbarComponent,
     ProductoDetalleComponent,
@@ -32,6 +39,7 @@ import { ToastrModule } from 'ngx-toastr';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CommonModule,
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
