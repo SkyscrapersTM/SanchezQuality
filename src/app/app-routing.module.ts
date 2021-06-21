@@ -13,7 +13,7 @@ import { ProveedorNuevoComponent } from './proveedor/proveedor-nuevo/proveedor-n
 import { ProveedorComponent } from './proveedor/proveedor.component';
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent },
+  { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegistroComponent },
   { path: 'producto', component: ProductoComponent },
